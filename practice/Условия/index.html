@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Условия в практике</title>
+</head>
+<body>
+  <h3>Вложенность if ... else</h3>
+  <p>
+    Вполне нормально использовать один условный оператор if...else    внутри другого — вложить их. Например, мы могли бы обновить наше приложение прогноза погоды, чтобы показать ещё один набор вариантов в зависимости от температуры:
+  </p>
+  <label for="weather">Выберите тип погоды сегодня: </label>
+  <select id="weather">
+    <option value="">--Сделайте выбор--</option>
+    <option value="sunny">Солнечно</option>
+    <option value="rainy">Дождливо</option>
+    <option value="snowing">Снежно</option>
+    <option value="overcast">Облачно</option>
+  </select>
+
+  <p></p>
+  
+  <hr>
+  
+  <div>
+    <h2>Пример оператора "if - else" </h2>
+    <p> < и > — проверяет одно значение меньше или больше, чем другое.</p>
+    <label for="tempText">Введите какая температура Дома</label>
+    <input type="text" id="tempText">
+    <button type="button" onclick="setTemp()">Отправить</button>
+    
+    <p id="text"></p>
+    
+    <script>
+      let inputClient = document.getElementById("tempText");
+      let sentText = document.getElementById("text");
+      function setTemp() {
+        let clientInput = inputClient.value;
+    
+        if (clientInput < '40'){
+          sentText.textContent = ("У вашего дома температура меньше чем критические состояние " + clientInput);
+        } else {
+          sentText.textContent = ('Вашего дома температура больше чем критические состояние пожалуйста открыть окно');
+        }
+      };
+    </script>
+  </div>
+  
+  <hr>
+  
+  <div>
+    <h3>Логические операторы: И, ИЛИ и НЕ</h3>
+    <p>&& — И; позволяет объединить два или более выражения так, что каждое из них отдельно должно иметь значение true , чтобы в итоге общее выражение имело значение true.</p>
+    <label for="inputStatusStr"> напишите 'rainy' меньше чем *86 или 'sunny' больше чем *86</label>
+    <input type="text" id="inputStatusStr">
+    <input type="number" id="inputTempInt">
+    <button onclick="item()">Отправить</button>
+    <p id="text_a" ></p>
+    <p>Так, для примера, первый блок кода выполнится только в том случае, если statusStr === 'sunny' и TempInt < 86 вернут значение true.</p>
+    <script>
+      let statusStr = document.getElementById('inputStatusStr').value;
+      let TempInt = document.getElementById('inputTempInt').value;
+      let text = document.getElementById('text_a');
+      function item(){
+        if (statusStr === 'rainy' && 86 > TempInt){
+          alert(`*----${statusStr}----*----${TempInt}----*`),
+          text.textContent = 'Сейчас ' + TempInt + ' меньше чем *86 градусов по фаренгейту — хорошо и солнечно. Идите на пляж, или в парк, и купите мороженое.',
+          console.log(typeof(TempInt));
+        } else if (statusStr === 'sunny' && 86 <= TempInt){
+          alert(`*----${statusStr}----*----${TempInt}----*`),
+          text.textContent = 'Сейчас ' + TempInt + ' больше чем *86 градусов по фаренгейту — Жара! Если вы хотите выйти на улицу, обязательно используйте солнцезащитный крем.',
+          console.log(typeof(TempInt));
+        }
+      };
+    </script>
+  </div>
+  
+  <br>
+  <div>
+    <h3>Давайте посмотрим на быстрый пример оператора ИЛИ:</h3>
+    <label for="">в огне</label>
+    <input type="text" id="input_s">
+    <input type="text" id="input_d">
+    <button onclick="ili()">Отправить</button>
+    <p id="sendT"></p>
+    
+    <script>
+      let inputS = document.getElementById('input_s').value;
+      let inputD = document.getElementById('input_d').value;
+      let send = document.getElementById('sendT');
+      
+      function ili() {
+        if (inputS || inputD == "в огне"){
+          send.textContent = "Вы должны быстро покинуть дом.",
+          alert('Trevoga!!!');
+        } else {
+          send.textContent = "Вероятно, можно в нем оставаться.";
+        }
+      };
+    </script>
+  </div>
+  
+  
+  <hr>
+  
+  
+  <h3>Пример оператора switch</h3>
+  <p>Давайте рассмотрим реальный пример — перепишем наше приложение авто салон с использованием оператора switch:</p>
+  <div>
+    <label for="carshop">Выбрать какую машину хотите купить</label>
+    <select name="" id="carshop">
+      <option value="">--Сделайте выбор--</option>
+      <option value="mercedes">Mercedes-Benz</option>
+      <option value="bmw">BMW</option>
+      <option value="audi">Audi</option>
+      <option value="kia">Kia Motors</option>
+    </select>
+    <p id="more"></p>
+  </div>
+  
+  <hr>
+  <h3>Пример тернарного оператора</h3>
+  <select id="theme">
+    <option value="white">Белая</option>
+    <option value="black">Чёрная</option>
+  </select>
+  <script>
+    const selectTheme = document.getElementById("theme");
+    const html = document.querySelector("html");
+    document.body.style.padding = "10px";
+
+    function update(bgColor, textColor) {
+      html.style.backgroundColor = bgColor;
+      html.style.color = textColor;
+    }
+
+    selectTheme.onchange = function () {
+      selectTheme.value === "black"
+        ? update("black", "white")
+        : update("white", "black");
+    };
+  </script>
+  
+  
+  <hr>
+  
+
+  
+  <script src="script.js"></script>
+</body>
+</html>
