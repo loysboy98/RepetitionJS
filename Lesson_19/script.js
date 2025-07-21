@@ -17,7 +17,7 @@ const data = 50;
 if (data == 49){
   console.log(true);
 } else {
-  console.log(false);
+  console.log(false, `Your input ${data}`)
 };
 
 // // -------------------------
